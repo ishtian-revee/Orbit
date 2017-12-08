@@ -10,6 +10,10 @@ using namespace std;
 
 // global scope
 
+int width = 1024;
+int height = 768;
+float cameraAngle = 0.0f;
+
 // all planets structure
 struct PLANET{
 
@@ -36,22 +40,36 @@ GLfloat model_ambient[] = {1.0, 0.5, 0.5, 1.0};
 
 // function prototypes
 void init(void);
+void display();
 void createPlanets();
 void setupMaterials();
 void initRendering();
-void renderPlanets(struct PLANET &planet);
+void renderPlanet(struct PLANET &planet);
 void changeColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
+void update(int value);
+void handleResize(int width, int height);
 
 // main function
 int main(int argc, char** argv){
 
     createPlanets();
 
-    glutInit(&argc, argv);                                      // initializes the GLUT library
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);   // determines the OpenGL display mode
-	glutInitWindowSize(1080, 760);                              // defines window size
-	glutCreateWindow("Orbit");                                  // creates the window
-	init();
+    glutInit(&argc, argv);                                          // initializes the GLUT library
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);       // determines the OpenGL display mode
+    glutInitWindowSize(width, height);                              // defines window size
+    glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH)-width)/2,
+                           (glutGet(GLUT_SCREEN_HEIGHT)-height)/2); // setting the window at the middle of the screen
+    glutCreateWindow("Orbit");                                      // creates the window
+    init();
+    initRendering();
+
+    // handler functions
+    glutDisplayFunc(display);                                       // sets the display callback for the current window
+    glutReshapeFunc(handleResize);
+    glutTimerFunc(25, update, 0);                                   // adding a timer
+
+    glutMainLoop();
+	return 0;
 }
 
 /*
@@ -63,11 +81,53 @@ void init(void){
     setupMaterials();
 
     glEnable(GL_LIGHTING);              // enables lighting calculation
-	glEnable(GL_LIGHT0);                // enables light source 0
-	glEnable(GL_DEPTH_TEST);            // enables depth comparisons and update the depth buffer
-	glEnable(GL_CULL_FACE);             // enables cull polygons based on their winding in window coordinates
-	glFrontFace(GL_CCW);                // selects counterclockwise polygons as front-facing
-	glShadeModel(GL_SMOOTH);            // causes the computed colors of vertices to be interpolated as the primitive is rasterized
+    glEnable(GL_LIGHT0);                // enables light source 0
+    glEnable(GL_DEPTH_TEST);            // enables depth comparisons and update the depth buffer
+    glEnable(GL_CULL_FACE);             // enables cull polygons based on their winding in window coordinates
+    glFrontFace(GL_CCW);                // selects counterclockwise polygons as front-facing
+    glShadeModel(GL_SMOOTH);            // causes the computed colors of vertices to be interpolated as the primitive is rasterized
+}
+
+
+/*
+This function draws every 3D scenes to the display window
+*/
+void display(){
+
+    // sets the bit plane area of the window to values previously selected by glClearColor
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glMatrixMode(GL_MODELVIEW);             // switch to the drawing perspective
+	glLoadIdentity();                       // reset the drawing perspective
+	glRotatef(10.0, 1.0f, 0.0f, 0.0f);      // rotate the camera
+
+	// produces a translation by x y z co-ordinate by multiplying between this matrix and current matrix
+	glTranslatef(0.0f, -1.0f, -14.0f);
+
+	glPushMatrix();                         // save the transformations performed thus far
+	glRotatef(-60.0, 1.0f, 0.0f,0.0f);
+
+	// rendering the sun
+	glPushMatrix();
+	changeColor(0.9, 0.4, 0.2, 1.0);        // setting sun color
+	glBegin(GL_LINES);
+	glutSolidSphere(0.4f, 30, 30);
+	glEnd();
+	glPopMatrix();
+
+	// rendering all the planets
+	renderPlanet(mercury);
+	renderPlanet(venus);
+	renderPlanet(earth);
+	renderPlanet(mars);
+	renderPlanet(jupiter);
+	renderPlanet(saturn);
+	renderPlanet(urenus);
+	renderPlanet(neptune);
+	renderPlanet(pluto);
+
+    glPopMatrix();
+	glutSwapBuffers();
 }
 
 /*
@@ -207,11 +267,11 @@ void initRendering(){
 /*
 This function draws all the planets according to their given inputs
 */
-void renderPlanets(struct PLANET &planet){
+void renderPlanet(struct PLANET &planet){
 
     // setting planet's position along with orbit radius
-    planet.xPos = planet.orbitRadius * planet.orbitRadius * cos(planet.orbitRadius * RADIAN);
-    planet.yPos = planet.orbitRadius * planet.orbitRadius * sin(planet.orbitRadius * RADIAN);
+    planet.xPos = planet.orbitRadius * planet.orbitRadius * cos(planet.orbitPos * RADIAN);
+    planet.yPos = planet.orbitRadius * planet.orbitRadius * sin(planet.orbitPos * RADIAN);
 
     glPushMatrix();         // pushes the current matrix stack down by one, duplicating the current matrix
     changeColor(planet.color[0], planet.color[1], planet.color[2], 1.0);
@@ -223,7 +283,6 @@ void renderPlanets(struct PLANET &planet){
     glEnd();
 
     glPopMatrix();          // pops the current matrix stack, replacing the current matrix with the one below it on the stack
-
 
     planet.orbitPos += planet.speed;            // planet's position changing along with it's speed
     // if the planet's position reaches to 360 it will start from 0 again
@@ -243,4 +302,32 @@ void changeColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a){
 	model_ambient[2] = b;
 	model_ambient[3] = a;
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, model_ambient);      // specifies the ambient RGBA intensity of the entire scene
+}
+
+/*
+This function updates the camera angles
+*/
+void update(int value){
+
+    cameraAngle += 2.0;
+
+    if(cameraAngle >= 360.0){
+
+        cameraAngle = 0.0;
+    }
+
+    glutPostRedisplay();                // display has changed
+
+    glutTimerFunc(25, update, 0);       // calling update() again and again in every 25 milliseconds
+}
+
+/*
+This function deals with window resize
+*/
+void handleResize(int width, int height){
+
+    glViewport(0, 0, width, height);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(45.0, (double)width / (double)height, 1.0, 200.0);
 }
