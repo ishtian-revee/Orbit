@@ -12,7 +12,11 @@ using namespace std;
 
 int width = 1000;
 int height = 700;
-float cameraAngle = 0.0f;
+int numOfStars = 500;
+int starXPos[500];
+int starYPos[500];
+float starZPos = 0.0f;
+//float cameraAngle = 0.0f;
 
 // all planets structure
 struct PLANET{
@@ -34,7 +38,7 @@ struct PLANET mercury, venus, earth, mars, jupiter, saturn, urenus, neptune, plu
 GLfloat material_ambient[] = {1.0, 1.0, 1.0, 1.0};
 GLfloat material_specular[] = {1.0, 1.0, 1.0, 1.0};
 GLfloat material_shininess[] = {50.0};
-GLfloat light_position[] = {1.0, 1.0, -1.0, 0.0};
+GLfloat light_position[] = {1.0, 1.0, -0.8, 0.0};
 GLfloat model_ambient[] = {1.0, 0.5, 0.5, 1.0};
 
 
@@ -44,6 +48,8 @@ void display();
 void createPlanets();
 void setupMaterials();
 void initRendering();
+void generateRandomPosition();
+void renderStars();
 void renderPlanet(struct PLANET &planet);
 void changeColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 void update(int value);
@@ -53,6 +59,7 @@ void handleResize(int width, int height);
 int main(int argc, char** argv){
 
     createPlanets();
+    generateRandomPosition();
 
     glutInit(&argc, argv);                                          // initializes the GLUT library
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);       // determines the OpenGL display mode
@@ -107,11 +114,17 @@ void display(){
 	glPushMatrix();                         // save the transformations performed thus far
 	glRotatef(-60.0, 1.0f, 0.0f,0.0f);
 
+	// rendering stars
+	glPushMatrix();
+	glTranslatef(-95.0f, -140.0f, -50.0f);  // saving the transformations of the stars projection
+	renderStars();
+	glPopMatrix();
+
 	// rendering the sun
 	glPushMatrix();
 	changeColor(0.99, 0.84, 0.20, 1.0);        // setting sun color
 	glBegin(GL_LINES);
-	glutSolidSphere(0.5f, 30, 30);
+	glutSolidSphere(0.5f, 45, 45);
 	glEnd();
 	glPopMatrix();
 
@@ -142,7 +155,7 @@ void createPlanets(){
 	mercury.yPos = 0.0;
 	mercury.zPos = 0.0;
 	mercury.orbitRadius = 1.08;
-	mercury.orbitPos = 270.0;
+	mercury.orbitPos = 180.0;
 	mercury.color[0] = 0.75;
 	mercury.color[1] = 0.30;
 	mercury.color[2] = 0.16;
@@ -178,7 +191,7 @@ void createPlanets(){
 	mars.yPos = 0.0;
 	mars.zPos = 0.0;
 	mars.orbitRadius = 1.74;
-	mars.orbitPos = 0.0;
+	mars.orbitPos = 120.0;
 	mars.color[0] = 0.93;
 	mars.color[1] = 0.32;
 	mars.color[2] = 0.31;
@@ -214,7 +227,7 @@ void createPlanets(){
 	urenus.yPos = 0.0;
 	urenus.zPos = 0.0;
 	urenus.orbitRadius = 2.40;
-	urenus.orbitPos = 315.0;
+	urenus.orbitPos = 15.0;
 	urenus.color[0] = 0.39;
 	urenus.color[1] = 0.70;
 	urenus.color[2] = 0.96;
@@ -226,7 +239,7 @@ void createPlanets(){
 	neptune.yPos = 0.0;
 	neptune.zPos = 0.0;
 	neptune.orbitRadius = 2.62;
-	neptune.orbitPos = 45.0;
+	neptune.orbitPos = 350.0;
 	neptune.color[0] = 0.24;
 	neptune.color[1] = 0.31;
 	neptune.color[2] = 0.70;
@@ -238,7 +251,7 @@ void createPlanets(){
 	pluto.yPos = 0.0;
 	pluto.zPos = 0.0;
 	pluto.orbitRadius = 2.84;
-	pluto.orbitPos = 180.0;
+	pluto.orbitPos = 200.0;
 	pluto.color[0] = 0.93;
 	pluto.color[1] = 0.60;
 	pluto.color[2] = 0.60;
@@ -262,6 +275,37 @@ This function initializes 3D rendering
 void initRendering(){
 
     glEnable(GL_DEPTH_TEST);    // enables depth comparisons and update the depth buffer
+}
+
+/*
+This function will generate random position of x and y co-ordinate for stars
+*/
+void generateRandomPosition(){
+
+    for(int i=0; i<numOfStars; i++){
+
+        starXPos[i] = (float)((rand() % width)/ 120.0) * 30.0;      // generating random x co-ordinate of the stars
+        starYPos[i] = (float)((rand() % height)/ 45.0) * 20.0;      // generating random y co-ordinate of the stars
+    }
+}
+
+/*
+This function draws all the stars randomly over the screen
+*/
+void renderStars(){
+
+    glPushMatrix();
+    glPointSize(2.5);
+    glBegin(GL_POINTS);
+	//changeColor(1.0, 1.0, 1.0, 1.0);                              // setting stars color
+
+    for(int i=0; i<numOfStars; i++){
+
+        glVertex3f(starXPos[i], starYPos[i], starZPos);             // rendering stars on the screen
+    }
+
+    glEnd();
+    glPopMatrix();
 }
 
 /*
@@ -309,12 +353,12 @@ This function updates the camera angles
 */
 void update(int value){
 
-    cameraAngle += 2.0;
-
-    if(cameraAngle >= 360.0){
-
-        cameraAngle = 0.0;
-    }
+//    cameraAngle += 2.0;
+//
+//    if(cameraAngle >= 360.0){
+//
+//        cameraAngle = 0.0;
+//    }
 
     glutPostRedisplay();                // display has changed
 
