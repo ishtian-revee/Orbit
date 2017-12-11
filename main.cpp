@@ -296,6 +296,7 @@ void renderStars(){
 
     glPushMatrix();
     glPointSize(2.5);
+
     glBegin(GL_POINTS);
 	//changeColor(1.0, 1.0, 1.0, 1.0);                              // setting stars color
 
