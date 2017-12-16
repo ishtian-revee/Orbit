@@ -28,10 +28,9 @@ This function draws all the stars randomly over the screen
 void renderStars(){
 
     glPushMatrix();
-    glPointSize(2.5);
+    glPointSize(2.0);
 
     glBegin(GL_POINTS);
-	//changeColor(1.0, 1.0, 1.0, 1.0);                              // setting stars color
 
     for(int i=0; i<numOfStars; i++){
 
