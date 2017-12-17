@@ -3,6 +3,8 @@
 #include<stdlib.h>
 #include<iostream>
 #include<math.h>
+#include<vector>
+#include<cmath>
 
 #define RADIAN 180.0/3.141592
 
@@ -13,6 +15,7 @@
 #include "io_handler.h"
 #include "planet.h"
 #include "stars.h"
+#include "planetoid.h"
 
 using namespace std;
 
@@ -20,14 +23,14 @@ using namespace std;
 
 
 // function prototypes
-void intructions(void);
+//void intructions(void);
 void update(int value);
 void handleResize(int width, int height);
 
 // main function
 int main(int argc, char** argv){
 
-    intructions();
+//    intructions();
     createPlanets();
     generateRandomPosition();
 
@@ -50,17 +53,17 @@ int main(int argc, char** argv){
 	return 0;
 }
 
-void intructions(void){
-
-	cout << "SPACE to play/pause the simulation." << endl;
-	cout << "ESC to exit the simulation." << endl;
-	cout << "O to show/hide Big Orbital Trails." << endl;
-	cout << "o to show/hide Small Orbital Trails." << endl;
-	cout << "M/m to show/hide Moons." << endl;
-	cout << "L/l to show/hide labels" << endl;
-	cout << "1, 2 and 3 to change camera angles." << endl;
-	cout << "Scroll to change camera movement" << endl;
-}
+//void intructions(void){
+//
+//	cout << "SPACE to play/pause the simulation." << endl;
+//	cout << "ESC to exit the simulation." << endl;
+//	cout << "O to show/hide Big Orbital Trails." << endl;
+//	cout << "o to show/hide Small Orbital Trails." << endl;
+//	cout << "M/m to show/hide Moons." << endl;
+//	cout << "L/l to show/hide labels" << endl;
+//	cout << "1, 2 and 3 to change camera angles." << endl;
+//	cout << "Scroll to change camera movement" << endl;
+//}
 
 /*
 This function updates the camera angles
