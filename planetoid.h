@@ -25,8 +25,6 @@ struct LINE{
     float y2;
 };
 
-// planetoid object
-struct PLANETOID ptoid;
 // line object
 struct LINE line;
 
@@ -37,12 +35,15 @@ This function creates planetoids and initializes it's values
 */
 void createPlanetoid(){
 
+    // planetoid object
+    struct PLANETOID ptoid;
+
     ptoid.xPos = 0.0;
     ptoid.yPos = 0.0;
     ptoid.vectorX = 0.0;
     ptoid.vectorY = 0.0;
     ptoid.mass = 10000;
-    ptoid.radius = 0.4;
+    ptoid.radius = 10;
     ptoid.color[0] = 0.91;
     ptoid.color[1] = 0.11;
     ptoid.color[2] = 0.39;

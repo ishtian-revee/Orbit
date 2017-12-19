@@ -55,14 +55,18 @@ void gameUpdate(int){
             }
 
             const PLANETOID &ptoid2 = planetoids[j];
-            float distance = sqrt((ptoid2.xPos - ptoid1.xPos) * (ptoid2.xPos - ptoid1.xPos) + (ptoid2.yPos - ptoid1.yPos) * (ptoid2.yPos - ptoid1.yPos));
+            float distance = sqrt((ptoid2.xPos - ptoid1.xPos) * (ptoid2.xPos - ptoid1.xPos) +
+                                  (ptoid2.yPos - ptoid1.yPos) * (ptoid2.yPos - ptoid1.yPos));
 
             if(distance > ptoid2.radius){
 
                 // force = mass * acceleration
                 // => acceleration = force/mass
-                ptoid1.vectorX += 0.03 * ptoid2.mass / (distance*distance) * (ptoid2.xPos - ptoid1.xPos) / distance;
-                ptoid1.vectorY += 0.03 * ptoid2.mass / (distance*distance) * (ptoid2.yPos - ptoid1.yPos) / distance;
+                ptoid1.vectorX += 0.03 * ptoid2.mass / (distance*distance) *
+                (ptoid2.xPos - ptoid1.xPos) / distance;
+
+                ptoid1.vectorY += 0.03 * ptoid2.mass / (distance*distance) *
+                (ptoid2.yPos - ptoid1.yPos) / distance;
             }else{
 
                 noCollision = false;

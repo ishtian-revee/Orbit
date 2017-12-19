@@ -3,11 +3,11 @@
 
 // global scope variables
 
-int width = 1000;
-int height = 700;
-int numOfStars = 500;
-int starXPos[500];
-int starYPos[500];
+int width = 750;
+int height = 750;
+int numOfStars = 600;
+int starXPos[600];
+int starYPos[600];
 float starZPos = 0.0f;
 
 /*
