@@ -42,7 +42,7 @@ void createPlanetoid(){
     ptoid.vectorX = 0.0;
     ptoid.vectorY = 0.0;
     ptoid.mass = 10000;
-    ptoid.radius = 10;
+    ptoid.radius = 0.4;
     ptoid.color[0] = 0.91;
     ptoid.color[1] = 0.11;
     ptoid.color[2] = 0.39;

@@ -224,7 +224,7 @@
 1341006774 f:\installed_softwares\codeblocks\mingw\include\math.h
 	<_mingw.h>
 
-1513502545 source:d:\git and github\games\orbit\main.cpp
+1513675956 source:d:\git and github\games\orbit\main.cpp
 	<windows.h>
 	<GL/glut.h>
 	<stdlib.h>
@@ -246,7 +246,7 @@
 
 1513350781 d:\git and github\games\orbit\materials.h
 
-1513499719 d:\git and github\games\orbit\display.h
+1513675829 d:\git and github\games\orbit\display.h
 	"planet.h"
 	"stars.h"
 	"labels.h"
@@ -255,16 +255,16 @@
 1513440182 d:\git and github\games\orbit\planet.h
 	"materials.h"
 
-1513439682 d:\git and github\games\orbit\stars.h
+1513675665 d:\git and github\games\orbit\stars.h
 
 1513439768 d:\git and github\games\orbit\labels.h
 
-1513498173 d:\git and github\games\orbit\io_handler.h
+1513676127 d:\git and github\games\orbit\io_handler.h
 	"planetoid.h"
 
-1513497463 d:\git and github\games\orbit\planetoid.h
+1513675039 d:\git and github\games\orbit\planetoid.h
 
-1513502639 d:\git and github\games\orbit\updates.h
+1513675239 d:\git and github\games\orbit\updates.h
 	"display.h"
 	"io_handler.h"
 	"planetoid.h"

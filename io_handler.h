@@ -25,8 +25,8 @@ void keyboardInput(unsigned char key, int x, int y){
         if(solarSystemSimulation){
 
             solarSystemSimulation = false;
-            glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//            glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
+//            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             orbitalGameSimulation = true;
         }else{
 
@@ -71,6 +71,40 @@ void keyboardInput(unsigned char key, int x, int y){
 This function handles all mouse inputs
 */
 void mouseInput(int button, int state, int x, int y){
+
+//    if(orbitalGameSimulation){
+//
+//        // setting co-ordinates
+//        mX = x - (width/2);
+//        mY = y - (height/2);
+//
+//        // adding speed to the planetoids by line dragging
+//        if(SPEED_UP){
+//
+//            // checking line dragging co-ordinate and left mouse button press
+//            if(line.x2 != 0 && line.y2 != 0 && state == GLUT_UP && PRESSED_LEFT){
+//
+//                // adding a planetoid with motion speed
+//                addPlanetoid(100, 5, 1, line.x1-line.x2, line.y1-line.y2);
+//            }else{
+//
+//                line.x1 = line.x2 = mX;
+//                line.y1 = line.y2 = mY;
+//            }
+//        }
+//
+//        // checking which button is being pressed
+//        if(button == GLUT_LEFT_BUTTON){
+//
+//            PRESSED_LEFT = state = GLUT_DOWN;
+//        }else if(button == GLUT_MIDDLE_BUTTON){
+//
+//            PRESSED_MIDDLE = state = GLUT_DOWN;
+//        }else if(button == GLUT_RIGHT_BUTTON){
+//
+//            PRESSED_RIGHT = state = GLUT_DOWN;
+//        }
+//    }
 
     // setting co-ordinates
     mX = x - (width/2);

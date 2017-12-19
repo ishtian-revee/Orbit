@@ -33,42 +33,12 @@ int main(int argc, char** argv){
         createPlanets();
         generateRandomPosition();
 
-//        glutInit(&argc, argv);                                          // initializes the GLUT library
         glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);       // determines the OpenGL display mode
-//        glutInitWindowSize(width, height);                              // defines window size
-//        glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH)-width)/2,
-//                               (glutGet(GLUT_SCREEN_HEIGHT)-height)/2); // setting the window at the middle of the screen
-//        glutCreateWindow("Orbit");                                      // creates the window
-//
-//        init();
-//        initRendering();
-//
-//        glutDisplayFunc(display);                                       // sets the display callback for the current window
-//        glutReshapeFunc(handleResize);
-//
-//        glutKeyboardFunc(keyboardInput);
-//        glutTimerFunc(25, simulationUpdate, 0);
     }else if(orbitalGameSimulation){
 
         createPlanetoid();
 
-//        glutInit(&argc, argv);                                          // initializes the GLUT library
         glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);                    // determines the OpenGL display mode
-//        glutInitWindowSize(width, height);                              // defines window size
-//        glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH)-width)/2,
-//                               (glutGet(GLUT_SCREEN_HEIGHT)-height)/2); // setting the window at the middle of the screen
-//        glutCreateWindow("Orbit");                                      // creates the window
-//
-//        glClearColor(0, 0, 0, 1);
-//        glMatrixMode(GL_PROJECTION);
-//        glLoadIdentity();
-//        glOrtho(-250.0, 250.0, 250.0, -250.0, 0, 1);
-//
-//        glutDisplayFunc(display);                                       // sets the display callback for the current window
-//        glutKeyboardFunc(keyboardInput);
-//        glutTimerFunc(1, gameUpdate, 0);
-//        glutMouseFunc(mouseInput);
-//        glutMotionFunc(mouseMotionInput);
     }
 
     glutInit(&argc, argv);                                          // initializes the GLUT library
@@ -87,7 +57,7 @@ int main(int argc, char** argv){
         glClearColor(0, 0, 0, 1);
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        glOrtho(-250.0, 250.0, 250.0, -250.0, 0, 1);
+        glOrtho(-500.0, 350.0, 500.0, -350.0, 0, 1);
     }
 
     // handler functions

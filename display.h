@@ -132,11 +132,17 @@ void display(){
         }
         glPopMatrix();
 
+        glPushMatrix();
+        changeColor(1.0, 1.0, 1.0, 1.0);                                    // setting default color for stars
+        glPopMatrix();
+
         glPopMatrix();
 	}
 
 	// checking if the game simulation state is live or not
 	if(orbitalGameSimulation){
+
+        glClear(GL_COLOR_BUFFER_BIT);
 
         // rendering the dragging line
         glColor3f(0, 0.59, 0.53);
@@ -152,19 +158,19 @@ void display(){
             glColor3f(ptoid.color[0], ptoid.color[1], ptoid.color[2]);
             glBegin(GL_POLYGON);
 
-            for(float j=0; j<2*M_PI; j+=0.2){
+            for(float j=0; j<2*M_PI; j+=0.1){
 
                 // rendering in planetoids motion positions
                 glVertex2f(ptoid.radius*cos(j) + ptoid.xPos, ptoid.radius*sin(j) + ptoid.yPos);
             }
 
             glEnd();
-            glFlush();
         }
+
+        glFlush();
 	}
 
 	glutSwapBuffers();
-	changeColor(1.0, 1.0, 1.0, 1.0);                                    // setting default color
 }
 
 #endif // DISPLAY_H_INCLUDED
