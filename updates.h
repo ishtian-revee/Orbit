@@ -25,7 +25,7 @@ void gameUpdate(int){
 
     if(PRESSED_LEFT && !SPEED_UP){
 
-        addPlanetoid(10, 3, 0, NULL, NULL);         // small planetoids
+        addPlanetoid(10, 6, 1, NULL, NULL);         // small planetoids
         PRESSED_LEFT = false;
     }
 
@@ -36,7 +36,7 @@ void gameUpdate(int){
 
     if(PRESSED_RIGHT){
 
-        addPlanetoid(10000, 10, 0, NULL, NULL);     // adding huge planetoids
+        addPlanetoid(10000, 15, 0, NULL, NULL);     // adding huge planetoids
         PRESSED_RIGHT = false;
     }
 

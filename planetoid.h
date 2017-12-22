@@ -43,7 +43,7 @@ void createPlanetoid(){
     ptoid.vectorX = 0.0;
     ptoid.vectorY = 0.0;
     ptoid.mass = 10000;
-    ptoid.radius = 10;
+    ptoid.radius = 15;
     ptoid.color[0] = 0.91;
     ptoid.color[1] = 0.11;
     ptoid.color[2] = 0.39;
@@ -72,9 +72,9 @@ void addPlanetoid(float mass, float radius, bool randomColor, float vX, float vY
     }else{
 
         // if planetoid is a larger one
-        ptoid.color[0] = 0.40;
-        ptoid.color[0] = 0.23;
-        ptoid.color[0] = 0.72;
+        ptoid.color[0] = 0.91;
+        ptoid.color[1] = 0.11;
+        ptoid.color[2] = 0.39;
     }
 
     planetoids.push_back(ptoid);

@@ -83,7 +83,7 @@ void mouseInput(int button, int state, int x, int y){
         if(line.x2 != 0 && line.y2 != 0 && state == GLUT_UP && PRESSED_LEFT){
 
             // adding a planetoid with motion speed
-            addPlanetoid(100, 5, 1, line.x1-line.x2, line.y1-line.y2);
+            addPlanetoid(100, 9, 1, line.x1-line.x2, line.y1-line.y2);
         }else{
 
             line.x1 = line.x2 = mX;
