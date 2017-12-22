@@ -14,6 +14,8 @@ bool labelsActive = true;
 bool solarSystemSimulation = true;
 bool orbitalGameSimulation = false;
 
+int gameWindow = 0;
+
 /*
 This function handles all keyboard inputs
 */
@@ -22,12 +24,14 @@ void keyboardInput(unsigned char key, int x, int y){
     // this will display the solar system simulation
     if(key == 's' || key == 'S'){
 
-        if(solarSystemSimulation){
+        if(solarSystemSimulation && gameWindow < 1){
 
             solarSystemSimulation = false;
 //            glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
 //            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            orbitalGameSimulation = true;
+           orbitalGameSimulation = true;
+           gameWindow++;
+           temp();
         }else{
 
             solarSystemSimulation = true;
@@ -89,6 +93,23 @@ void mouseInput(int button, int state, int x, int y){
             line.x1 = line.x2 = mX;
 			line.y1 = line.y2 = mY;
         }
+    }
+
+    if(PRESSED_LEFT && !SPEED_UP){
+
+        addPlanetoid(10, 6, 1, NULL, NULL);         // small planetoids
+        PRESSED_LEFT = false;
+    }
+
+    if(PRESSED_MIDDLE){
+
+        removePlanetoids();                         // remove all planetoids
+    }
+
+    if(PRESSED_RIGHT){
+
+        addPlanetoid(10000, 15, 0, NULL, NULL);     // adding huge planetoids
+        PRESSED_RIGHT = false;
     }
 
     // checking which button is being pressed

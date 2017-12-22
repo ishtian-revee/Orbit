@@ -8,6 +8,9 @@
 
 #define RADIAN 180.0/3.141592
 
+// function prototypes
+void temp();
+
 // header files
 #include "initialization.h"
 #include "updates.h"
@@ -21,8 +24,6 @@
 using namespace std;
 
 // global scope
-
-// function prototypes
 
 
 // main function
@@ -99,8 +100,8 @@ int main(int argc, char** argv){
     glutReshapeFunc(handleResize);
 
     glutKeyboardFunc(keyboardInput);
-    glutMouseFunc(mouseInput);
-	glutMotionFunc(mouseMotionInput);
+//    glutMouseFunc(mouseInput);
+//	glutMotionFunc(mouseMotionInput);
 
 	// adding a timer function
 	glutTimerFunc(25, simulationUpdate, 0);
@@ -122,7 +123,7 @@ int main(int argc, char** argv){
 //    glLoadIdentity();
 //    glOrtho(-(float)(width/2), (float)(height/2),
 //            (float)(width/2), -(float)(height/2), 0, 1);
-//
+
 //    glutDisplayFunc(display);
 //    glutMouseFunc(mouseInput);
 //	  glutMotionFunc(mouseMotionInput);
@@ -133,4 +134,32 @@ int main(int argc, char** argv){
 
     glutMainLoop();
 	return 0;
+}
+
+void temp(){
+
+    createPlanetoid();
+    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//  glutInit(&argc, argv);                                          // initializes the GLUT library
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);       // determines the OpenGL display mode
+    glutInitWindowSize(width, height);                              // defines window size
+    glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH)-width)/2,
+                                   (glutGet(GLUT_SCREEN_HEIGHT)-height)/2); // setting the window at the middle of the screen
+    glutCreateWindow("Orbit");                                      // creates the window
+
+    glClearColor(0, 0, 0, 1);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(-(float)(width/2), (float)(height/2),
+            (float)(width/2), -(float)(height/2), 0, 1);
+
+    glutDisplayFunc(display);
+//    glutReshapeFunc(handleResize);
+
+    glutKeyboardFunc(keyboardInput);
+    glutMouseFunc(mouseInput);
+	glutMotionFunc(mouseMotionInput);
+
+    // adding a timer function
+    glutTimerFunc(1, gameUpdate, 0);
 }
