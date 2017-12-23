@@ -12,6 +12,7 @@ This function draws every 3D scenes to the display window
 */
 void display(){
 
+    // if the solar system simulation is currently active
 	if(solarSystemSimulation){
 
         // sets the bit plane area of the window to values previously selected by glClearColor
@@ -37,9 +38,10 @@ void display(){
         glPushMatrix();
         changeColor(0.99, 0.84, 0.20, 1.0);     // setting sun color
         glBegin(GL_LINES);
-        glutSolidSphere(0.5f, 45, 45);
+        glutSolidSphere(0.5f, 45, 45);          // rendering the sun
         glEnd();
 
+        // if planet labels are active
         if(labelsActive){
 
             glPushMatrix();
@@ -133,8 +135,10 @@ void display(){
         glPopMatrix();
 
         glPushMatrix();
-        changeColor(1.0, 1.0, 1.0, 1.0);                                    // setting default color for stars
+        changeColor(0.96, 0.96, 0.96, 1.0);         // setting instruction strings color
         glPopMatrix();
+
+        drawInstructions();
 
         glPopMatrix();
 	}
@@ -144,6 +148,8 @@ void display(){
 
         // sets the bit plane area of the window to values previously selected by glClearColor
         glClear(GL_COLOR_BUFFER_BIT);
+
+        render2DStars();
 
         // rendering the dragging line
         glColor3f(0, 0.59, 0.53);
@@ -168,10 +174,12 @@ void display(){
             glEnd();
         }
 
-        glFlush();
+        glColor3f(0.96, 0.96, 0.96);    // setting instruction strings color
+        drawInstructions();
+        glFlush();          // empties all of the buffers
 	}
 
-	glutSwapBuffers();
+	glutSwapBuffers();      // swaps the buffers of the current window if double buffered
 }
 
 #endif // DISPLAY_H_INCLUDED

@@ -31,7 +31,7 @@ struct LINE line;
 std::vector<PLANETOID> planetoids;
 
 /*
-This function creates planetoids and initializes it's values
+This function creates first stable planetoid and initializes it's values
 */
 void createPlanetoid(){
 
@@ -47,11 +47,11 @@ void createPlanetoid(){
     ptoid.color[0] = 0.91;
     ptoid.color[1] = 0.11;
     ptoid.color[2] = 0.39;
-    planetoids.push_back(ptoid);
+    planetoids.push_back(ptoid);    // add a planetoid object at the end of the vector
 }
 
 /*
-This function will
+This function will add planetoids when a mouse event occurs
 */
 void addPlanetoid(float mass, float radius, bool randomColor, float vX, float vY){
 
@@ -64,6 +64,7 @@ void addPlanetoid(float mass, float radius, bool randomColor, float vX, float vY
     ptoid.mass = mass;
     ptoid.radius = radius;
 
+    // if planetoid is said to have random colors
     if(randomColor){
 
         ptoid.color[0] = rand()%200 / 200.0;
@@ -71,13 +72,13 @@ void addPlanetoid(float mass, float radius, bool randomColor, float vX, float vY
 		ptoid.color[2] = rand()%200 / 200.0;
     }else{
 
-        // if planetoid is a larger one
+        // if planetoid is a larger one then set it's default color
         ptoid.color[0] = 0.91;
         ptoid.color[1] = 0.11;
         ptoid.color[2] = 0.39;
     }
 
-    planetoids.push_back(ptoid);
+    planetoids.push_back(ptoid);    // add planetoid objects at the end of the vector
 
     if(line.x1 != 0){
 
@@ -92,7 +93,7 @@ void removePlanetoids(){
 
     for(int i=0; i<planetoids.size(); i++){
 
-        planetoids.pop_back();
+        planetoids.pop_back();      // removes last planetoid object from the vector
     }
 }
 

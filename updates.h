@@ -7,7 +7,7 @@
 #include "planetoid.h"
 
 /*
-This function deals with solar system simulation timer function
+This function deals with solar system simulation timer function and all other ticking and updates
 */
 void simulationUpdate(int value){
 
@@ -17,28 +17,11 @@ void simulationUpdate(int value){
 }
 
 /*
-This function deals with orbital game simulation timer function
+This function deals with orbital game simulation timer function and all other ticking and updates
 */
 void gameUpdate(int){
 
     display();
-
-    if(PRESSED_LEFT && !SPEED_UP){
-
-        addPlanetoid(10, 6, 1, NULL, NULL);         // small planetoids
-        PRESSED_LEFT = false;
-    }
-
-    if(PRESSED_MIDDLE){
-
-        removePlanetoids();                         // remove all planetoids
-    }
-
-    if(PRESSED_RIGHT){
-
-        addPlanetoid(10000, 15, 0, NULL, NULL);     // adding huge planetoids
-        PRESSED_RIGHT = false;
-    }
 
     for(int i=0; i<planetoids.size(); i++){
 
@@ -55,9 +38,13 @@ void gameUpdate(int){
             }
 
             const PLANETOID &ptoid2 = planetoids[j];
+
+            // calculating distance value
+            // distance calculation formula: d = sqrt(x^x + y^y)
             float distance = sqrt((ptoid2.xPos - ptoid1.xPos) * (ptoid2.xPos - ptoid1.xPos) +
                                   (ptoid2.yPos - ptoid1.yPos) * (ptoid2.yPos - ptoid1.yPos));
 
+            // making sure if there is any collision happening between larger planetoid and other small ones
             if(distance > ptoid2.radius){
 
                 // force = mass * acceleration
@@ -79,10 +66,12 @@ void gameUpdate(int){
             ptoid1.yPos += ptoid1.vectorY;
         }else{
 
+            // if collision occurs then erasing the smaller planetoids from the vector
             planetoids.erase(planetoids.begin() + i);
         }
     }
 
+    // recalling the timer function
     glutTimerFunc(1, gameUpdate, 0);
 }
 
@@ -91,9 +80,11 @@ This function deals with window resize
 */
 void handleResize(int width, int height){
 
-    glViewport(0, 0, width, height);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
+    glViewport(0, 0, width, height);        // sets the view port
+    glMatrixMode(GL_PROJECTION);            // applies subsequent matrix operations to the projection matrix stack
+    glLoadIdentity();                       // reset the drawing perspective
+
+    // set up a perspective projection matrix and specifies a viewing frustum into the world coordinate system
     gluPerspective(45.0, (double)width / (double)height, 1.0, 200.0);
 }
 

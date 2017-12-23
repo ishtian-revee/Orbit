@@ -8,8 +8,13 @@
 
 #define RADIAN 180.0/3.141592
 
+// global scope variables
+int width = 750;
+int height = 750;
+
 // function prototypes
-void temp();
+void gameSimulationWindowHandler();
+void drawInstructions();
 
 // header files
 #include "initialization.h"
@@ -22,9 +27,6 @@ void temp();
 #include "planetoid.h"
 
 using namespace std;
-
-// global scope
-
 
 // main function
 int main(int argc, char** argv){
@@ -92,15 +94,18 @@ int main(int argc, char** argv){
                            (glutGet(GLUT_SCREEN_HEIGHT)-height)/2); // setting the window at the middle of the screen
     glutCreateWindow("Orbit");                                      // creates the window
 
+    // initializations
     init();
     initRendering();
 
     // handler functions
-    glutDisplayFunc(display);                                       // sets the display callback for the current window
+    glutDisplayFunc(display);           // sets the display callback for the current window
+    // sets the reshape callback for the current window and is triggered when a window is reshaped
     glutReshapeFunc(handleResize);
 
+    // i/o handlers
     glutKeyboardFunc(keyboardInput);
-//    glutMouseFunc(mouseInput);
+//  glutMouseFunc(mouseInput);
 //	glutMotionFunc(mouseMotionInput);
 
 	// adding a timer function
@@ -132,34 +137,76 @@ int main(int argc, char** argv){
 //    // adding a timer function
 //    glutTimerFunc(1, gameUpdate, 0);
 
-    glutMainLoop();
+    glutMainLoop();                        // enters the GLUT event processing loop
 	return 0;
 }
 
-void temp(){
+/*
+This function setups all the pre requirements for game simulation
+*/
+void gameSimulationWindowHandler(){
 
     createPlanetoid();
-    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//  glutInit(&argc, argv);                                          // initializes the GLUT library
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);       // determines the OpenGL display mode
-    glutInitWindowSize(width, height);                              // defines window size
+
+    // clearing buffers and indicating the buffers currently enabled for color writing and the depth buffer
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);                            // determines the OpenGL display mode
+    glutInitWindowSize(width, height);                                      // defines window size
     glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH)-width)/2,
                                    (glutGet(GLUT_SCREEN_HEIGHT)-height)/2); // setting the window at the middle of the screen
-    glutCreateWindow("Orbit");                                      // creates the window
+    glutCreateWindow("Orbit");                                              // creates the window
 
-    glClearColor(0, 0, 0, 1);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrtho(-(float)(width/2), (float)(height/2),
-            (float)(width/2), -(float)(height/2), 0, 1);
+    glClearColor(0, 0, 0, 1);                               // clears the color buffers
+    glMatrixMode(GL_PROJECTION);                            // applies subsequent matrix operations to the projection matrix stack
+    glLoadIdentity();                                       // reset the drawing perspective
+    glOrtho(-(float)(width/2), (float)(width/2),
+            (float)(height/2), -(float)(height/2), 0, 1);   // describes a transformation that produces a parallel projection
 
-    glutDisplayFunc(display);
-//    glutReshapeFunc(handleResize);
+    // handler functions
+    glutDisplayFunc(display);                               // sets the display callback for the current window
 
+    // i/o handlers
     glutKeyboardFunc(keyboardInput);
     glutMouseFunc(mouseInput);
 	glutMotionFunc(mouseMotionInput);
 
     // adding a timer function
     glutTimerFunc(1, gameUpdate, 0);
+
+    glutMainLoop();                 // enters the GLUT event processing loop
+}
+
+/*
+This function will display all instruction strings to the screen
+*/
+void drawInstructions(){
+
+    if(solarSystemSimulation){
+
+        glPushMatrix();
+        glRasterPos3f(-6.0, -8.7, 0.0);                                         // setting string rendering position
+        drawString(GLUT_BITMAP_HELVETICA_18, "Press L or l for Planet Labels"); // drawing instructions strings
+        glPopMatrix();
+
+        glPushMatrix();
+        glRasterPos3f(-5.85, -9.2, 0.0);                                         // setting string rendering position
+        drawString(GLUT_BITMAP_HELVETICA_18, "Press S or s for Orbital Simulation Screen"); // drawing instructions strings
+        glPopMatrix();
+
+        glPushMatrix();
+        glRasterPos3f(-5.69, -9.7, 0.0);                                        // setting string rendering position
+        drawString(GLUT_BITMAP_HELVETICA_18, "Press ESC to terminate");         // drawing instructions strings
+        glPopMatrix();
+    }else if(orbitalGameSimulation){
+
+        glPushMatrix();
+        glRasterPos3f(-360.0, 325.0, 0.0);                                      // setting string rendering position
+        drawString(GLUT_BITMAP_HELVETICA_18, "Press G or g to set speed with specific direction and then drag it");
+        glPopMatrix();
+
+        glPushMatrix();
+        glRasterPos3f(-360.0, 350.0, 0.0);                                      // setting string rendering position
+        drawString(GLUT_BITMAP_HELVETICA_18, "Press ESC to terminate");         // drawing instructions strings
+        glPopMatrix();
+    }
 }

@@ -14,37 +14,26 @@ bool labelsActive = true;
 bool solarSystemSimulation = true;
 bool orbitalGameSimulation = false;
 
-int gameWindow = 0;
-
 /*
 This function handles all keyboard inputs
 */
 void keyboardInput(unsigned char key, int x, int y){
 
-    // this will display the solar system simulation
+    // this will display the orbital game simulation
     if(key == 's' || key == 'S'){
 
-        if(solarSystemSimulation && gameWindow < 1){
+        if(solarSystemSimulation){
 
             solarSystemSimulation = false;
-//            glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
-//            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-           orbitalGameSimulation = true;
-           gameWindow++;
-           temp();
+            orbitalGameSimulation = true;
+            gameSimulationWindowHandler();
         }else{
 
-            solarSystemSimulation = true;
-            orbitalGameSimulation = false;
+//            solarSystemSimulation = true;
+//            orbitalGameSimulation = false;
         }
 
         glutPostRedisplay();
-    }
-
-    // this will close the application
-    if(key == 27){
-
-        exit(0);
     }
 
     // this will activate all the planet name labels to the screen
@@ -69,6 +58,12 @@ void keyboardInput(unsigned char key, int x, int y){
             SPEED_UP = !SPEED_UP;
         }
     }
+
+    // this will close the application
+    if(key == 27){
+
+        exit(0);
+    }
 }
 
 /*
@@ -90,26 +85,10 @@ void mouseInput(int button, int state, int x, int y){
             addPlanetoid(100, 9, 1, line.x1-line.x2, line.y1-line.y2);
         }else{
 
+            // setting line co ordinates for rendering
             line.x1 = line.x2 = mX;
 			line.y1 = line.y2 = mY;
         }
-    }
-
-    if(PRESSED_LEFT && !SPEED_UP){
-
-        addPlanetoid(10, 6, 1, NULL, NULL);         // small planetoids
-        PRESSED_LEFT = false;
-    }
-
-    if(PRESSED_MIDDLE){
-
-        removePlanetoids();                         // remove all planetoids
-    }
-
-    if(PRESSED_RIGHT){
-
-        addPlanetoid(10000, 15, 0, NULL, NULL);     // adding huge planetoids
-        PRESSED_RIGHT = false;
     }
 
     // checking which button is being pressed
@@ -122,6 +101,26 @@ void mouseInput(int button, int state, int x, int y){
 	else if(button == GLUT_MIDDLE_BUTTON)
 
 		PRESSED_MIDDLE = state == GLUT_DOWN;
+
+    // if left button is clicked then small planetoids will generate
+    if(PRESSED_LEFT && !SPEED_UP){
+
+        addPlanetoid(10, 6, 1, NULL, NULL);         // small planetoids
+        PRESSED_LEFT = false;
+    }
+
+    // if middle button is clicked then all planetoid objects will be removed
+    if(PRESSED_MIDDLE){
+
+        removePlanetoids();                         // remove all planetoids
+    }
+
+    // if right button is clicked then larger planetoids will generate
+    if(PRESSED_RIGHT){
+
+        addPlanetoid(10000, 15, 0, NULL, NULL);     // adding huge planetoids
+        PRESSED_RIGHT = false;
+    }
 }
 
 /*
@@ -136,6 +135,7 @@ void mouseMotionInput(int x, int y){
     // end of line with dragging
     if(SPEED_UP && PRESSED_LEFT){
 
+        // setting line co ordinates for rendering
         line.x2 = mX;
         line.y2 = mY;
     }
