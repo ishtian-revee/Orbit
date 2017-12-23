@@ -5,6 +5,7 @@
 #include<math.h>
 #include<vector>
 #include<cmath>
+#include<IrrKlang/irrklang.h>
 
 #define RADIAN 180.0/3.141592
 
@@ -25,6 +26,7 @@ void drawInstructions();
 #include "planet.h"
 #include "stars.h"
 #include "planetoid.h"
+#include "music.h"
 
 using namespace std;
 
@@ -84,6 +86,7 @@ int main(int argc, char** argv){
     // -------------------------------------------------------------------------------------------------------------------
 
     // only solar system simulation
+//    playMusic();
     createPlanets();
     generateRandomPosition();
 
@@ -185,28 +188,43 @@ void drawInstructions(){
 
         glPushMatrix();
         glRasterPos3f(-6.0, -8.7, 0.0);                                         // setting string rendering position
-        drawString(GLUT_BITMAP_HELVETICA_18, "Press L or l for Planet Labels"); // drawing instructions strings
+        drawString(GLUT_BITMAP_HELVETICA_18, "i. Press L or l for Planet Labels"); // drawing instructions strings
         glPopMatrix();
 
         glPushMatrix();
         glRasterPos3f(-5.85, -9.2, 0.0);                                         // setting string rendering position
-        drawString(GLUT_BITMAP_HELVETICA_18, "Press S or s for Orbital Simulation Screen"); // drawing instructions strings
+        drawString(GLUT_BITMAP_HELVETICA_18, "ii. Press S or s for Orbital Simulation Screen"); // drawing instructions strings
         glPopMatrix();
 
         glPushMatrix();
         glRasterPos3f(-5.69, -9.7, 0.0);                                        // setting string rendering position
-        drawString(GLUT_BITMAP_HELVETICA_18, "Press ESC to terminate");         // drawing instructions strings
+        drawString(GLUT_BITMAP_HELVETICA_18, "iii. Press ESC to terminate");         // drawing instructions strings
         glPopMatrix();
     }else if(orbitalGameSimulation){
 
         glPushMatrix();
-        glRasterPos3f(-360.0, 325.0, 0.0);                                      // setting string rendering position
-        drawString(GLUT_BITMAP_HELVETICA_18, "Press G or g to set speed with specific direction and then drag it");
+        glRasterPos3f(-360.0, 260.0, 0.0);                                      // setting string rendering position
+        drawString(GLUT_BITMAP_HELVETICA_18, "i. Left mouse click to create smaller planetoids");
         glPopMatrix();
 
         glPushMatrix();
-        glRasterPos3f(-360.0, 350.0, 0.0);                                      // setting string rendering position
-        drawString(GLUT_BITMAP_HELVETICA_18, "Press ESC to terminate");         // drawing instructions strings
+        glRasterPos3f(-360.0, 285.0, 0.0);                                      // setting string rendering position
+        drawString(GLUT_BITMAP_HELVETICA_18, "ii. Right mouse click to create larger planetoids");
+        glPopMatrix();
+
+        glPushMatrix();
+        glRasterPos3f(-360.0, 310.0, 0.0);                                      // setting string rendering position
+        drawString(GLUT_BITMAP_HELVETICA_18, "iii. Middle mouse click to remove all planetoids");
+        glPopMatrix();
+
+        glPushMatrix();
+        glRasterPos3f(-360.0, 335.0, 0.0);                                      // setting string rendering position
+        drawString(GLUT_BITMAP_HELVETICA_18, "iv. Press G or g to set speed with specific direction and then drag it");
+        glPopMatrix();
+
+        glPushMatrix();
+        glRasterPos3f(-360.0, 360.0, 0.0);                                      // setting string rendering position
+        drawString(GLUT_BITMAP_HELVETICA_18, "v. Press ESC to terminate");         // drawing instructions strings
         glPopMatrix();
     }
 }

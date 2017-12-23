@@ -224,7 +224,7 @@
 1341006774 f:\installed_softwares\codeblocks\mingw\include\math.h
 	<_mingw.h>
 
-1514014549 source:d:\git and github\games\orbit\main.cpp
+1514018802 source:d:\git and github\games\orbit\main.cpp
 	<windows.h>
 	<GL/glut.h>
 	<stdlib.h>
@@ -232,6 +232,7 @@
 	<math.h>
 	<vector>
 	<cmath>
+	<IrrKlang/irrklang.h>
 	"initialization.h"
 	"updates.h"
 	"display.h"
@@ -240,6 +241,7 @@
 	"planet.h"
 	"stars.h"
 	"planetoid.h"
+	"music.h"
 
 1513350971 d:\git and github\games\orbit\initialization.h
 	"materials.h"
@@ -268,4 +270,137 @@
 	"display.h"
 	"io_handler.h"
 	"planetoid.h"
+
+1398473010 f:\installed_softwares\codeblocks\mingw\include\irrklang\irrklang.h
+	"ik_irrKlangTypes.h"
+	"ik_vec3d.h"
+	"ik_IRefCounted.h"
+	"ik_IVirtualRefCounted.h"
+	"ik_ESoundOutputDrivers.h"
+	"ik_ESoundEngineOptions.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+	"ik_ISoundEngine.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_IAudioStream.h"
+	"ik_IAudioStreamLoader.h"
+	"ik_ISoundEffectControl.h"
+	"ik_ISoundStopEventReceiver.h"
+	"ik_IFileFactory.h"
+	"ik_IFileReader.h"
+	"ik_ISoundDeviceList.h"
+	"ik_IAudioRecorder.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1394077454 f:\installed_softwares\codeblocks\mingw\include\irrklang\ik_irrklangtypes.h
+	<wchar.h>
+
+1341006778 f:\installed_softwares\codeblocks\mingw\include\wchar.h
+	<_mingw.h>
+	<stddef.h>
+	<stdarg.h>
+	<wctype.h>
+	<sys/types.h>
+	<stdio.h>
+	<stdint.h>
+	<stdint.h>
+
+1341006778 f:\installed_softwares\codeblocks\mingw\include\wctype.h
+	<_mingw.h>
+	<stddef.h>
+
+1341006780 f:\installed_softwares\codeblocks\mingw\include\sys\types.h
+	<_mingw.h>
+	<stddef.h>
+
+1341006776 f:\installed_softwares\codeblocks\mingw\include\stdio.h
+	<_mingw.h>
+	<stddef.h>
+	<stdarg.h>
+	<sys/types.h>
+
+1341006776 f:\installed_softwares\codeblocks\mingw\include\stdint.h
+	<stddef.h>
+
+1398997938 f:\installed_softwares\codeblocks\mingw\include\irrklang\ik_vec3d.h
+	<math.h>
+	"ik_irrKlangTypes.h"
+
+1394067294 f:\installed_softwares\codeblocks\mingw\include\irrklang\ik_irefcounted.h
+	"ik_irrKlangTypes.h"
+
+1394067294 f:\installed_softwares\codeblocks\mingw\include\irrklang\ik_ivirtualrefcounted.h
+	"ik_irrKlangTypes.h"
+
+1394067300 f:\installed_softwares\codeblocks\mingw\include\irrklang\ik_esoundoutputdrivers.h
+
+1394067294 f:\installed_softwares\codeblocks\mingw\include\irrklang\ik_esoundengineoptions.h
+
+1394067294 f:\installed_softwares\codeblocks\mingw\include\irrklang\ik_estreammodes.h
+
+1394067294 f:\installed_softwares\codeblocks\mingw\include\irrklang\ik_saudiostreamformat.h
+	"ik_IRefCounted.h"
+
+1394074864 f:\installed_softwares\codeblocks\mingw\include\irrklang\ik_isoundengine.h
+	"ik_IRefCounted.h"
+	"ik_vec3d.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_EStreamModes.h"
+	"ik_IFileFactory.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1394067294 f:\installed_softwares\codeblocks\mingw\include\irrklang\ik_isoundsource.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+
+1394067294 f:\installed_softwares\codeblocks\mingw\include\irrklang\ik_isound.h
+	"ik_IVirtualRefCounted.h"
+	"ik_ISoundEffectControl.h"
+	"ik_vec3d.h"
+
+1394067294 f:\installed_softwares\codeblocks\mingw\include\irrklang\ik_isoundeffectcontrol.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+
+1394074852 f:\installed_softwares\codeblocks\mingw\include\irrklang\ik_ifilefactory.h
+	"ik_IRefCounted.h"
+
+1394067294 f:\installed_softwares\codeblocks\mingw\include\irrklang\ik_isoundmixedoutputreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1394067294 f:\installed_softwares\codeblocks\mingw\include\irrklang\ik_iaudiostream.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1394067294 f:\installed_softwares\codeblocks\mingw\include\irrklang\ik_iaudiostreamloader.h
+	"ik_IRefCounted.h"
+	"ik_IFileReader.h"
+
+1394067294 f:\installed_softwares\codeblocks\mingw\include\irrklang\ik_ifilereader.h
+	"ik_IRefCounted.h"
+
+1394067294 f:\installed_softwares\codeblocks\mingw\include\irrklang\ik_isoundstopeventreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1394067294 f:\installed_softwares\codeblocks\mingw\include\irrklang\ik_isounddevicelist.h
+	"ik_IRefCounted.h"
+
+1394074848 f:\installed_softwares\codeblocks\mingw\include\irrklang\ik_iaudiorecorder.h
+	"ik_IRefCounted.h"
+	"ik_ISoundSource.h"
+
+1514019740 d:\git and github\games\orbit\music.h
+	<stdio.h>
+	<IrrKlang/irrKlang.h>
+	<conio.h>
+	"../common/conio.h"
+
+1341006770 f:\installed_softwares\codeblocks\mingw\include\conio.h
+	<_mingw.h>
 
