@@ -66,6 +66,7 @@ void gameUpdate(int){
             ptoid1.yPos += ptoid1.vectorY;
         }else{
 
+            planetoidCount--;
             // if collision occurs then erasing the smaller planetoids from the vector
             planetoids.erase(planetoids.begin() + i);
         }

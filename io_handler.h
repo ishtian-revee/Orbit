@@ -105,6 +105,7 @@ void mouseInput(int button, int state, int x, int y){
     // if left button is clicked then small planetoids will generate
     if(PRESSED_LEFT && !SPEED_UP){
 
+//        planetoidCount++;   // planetoids counter increasing
         addPlanetoid(10, 6, 1, NULL, NULL);         // small planetoids
         PRESSED_LEFT = false;
     }
@@ -112,12 +113,15 @@ void mouseInput(int button, int state, int x, int y){
     // if middle button is clicked then all planetoid objects will be removed
     if(PRESSED_MIDDLE){
 
+        planetoidCount = 0;
+        planetCount = 0;
         removePlanetoids();                         // remove all planetoids
     }
 
     // if right button is clicked then larger planetoids will generate
     if(PRESSED_RIGHT){
 
+        planetCount++;      // larger planets counter increasing
         addPlanetoid(10000, 15, 0, NULL, NULL);     // adding huge planetoids
         PRESSED_RIGHT = false;
     }
@@ -134,6 +138,8 @@ void mouseMotionInput(int x, int y){
 
     // end of line with dragging
     if(SPEED_UP && PRESSED_LEFT){
+
+//        planetoidCount++;   // planetoids counter increasing
 
         // setting line co ordinates for rendering
         line.x2 = mX;

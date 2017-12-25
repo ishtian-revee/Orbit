@@ -67,6 +67,8 @@ void addPlanetoid(float mass, float radius, bool randomColor, float vX, float vY
     // if planetoid is said to have random colors
     if(randomColor){
 
+        planetoidCount++;   // planetoids counter increasing
+
         ptoid.color[0] = rand()%200 / 200.0;
 		ptoid.color[1] = rand()%200 / 200.0;
 		ptoid.color[2] = rand()%200 / 200.0;
